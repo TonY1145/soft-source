@@ -9,7 +9,7 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 local updatesrc = {
-	check_upd_ver = 0, -- old version.
+	check_ver = 0, -- old version.
 	script_update = "", -- link to obnov script
 	script_version = 0, -- new script version. (0 - 0.0)
 	script_path = thisScript().path, -- storage script.
@@ -40,7 +40,7 @@ function updateload()
 	downloadUrlToFile(updatesrc.update_url, updatesrc.update_path, function(id, status)
 		if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			updateIni = inicfg.load(nil, updatesrc.update_path)
-			if updateIni.version.ver ~= updatesrc.check_upd_ver then
+			if updateIni.version.ver ~= updatesrc.check_ver then
 				upd_script = true
 				sampAddChatMessage("Found an update: "..updateIni.version.ver..". ")
 			else
